@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--  1. jdbc.properties 경로지정
+	2. DTO alias
+	3. 4가지 정보 설정
+	4. mapper 설정
+	5. mysqlsessionfactory 설정-->
+<properties resource="com/config/jdbc.properties"></properties> <!--1번-->
+
+	<typeAliases><!--2번-->
+		<typeAlias type="com.dto.CommentDTO" alias="CommentDTO"></typeAlias>
+	</typeAliases>
+	
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <!-- db 연결 4가지 정보  -->
+      <dataSource type="POOLED">
+      <!--3번인데, 프로퍼티스 파일의 [키값] 부분을 ${}에 넣음  -->
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${xxx}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <!-- Mapper.xml의 경로 등록 (Mapper.xml파일이 존재해야함 )-->
+  <mappers>
+    <mapper resource="com/config/CommentMapper.xml"/>
+  </mappers>
+</configuration>

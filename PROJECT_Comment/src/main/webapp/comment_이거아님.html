@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		
+	
+	$("#sendButton").click(function(){
+		
+		var userid = $("#userid").html();
+		var comdate = $("#comdate").html();
+		var comtext = $("#comtext").val();
+		
+		console.log(comtext); //textarea 에 입력된 값 넘어오는지 확인 완료
+		
+		$.ajax({
+			
+			type: "post",
+			url: "AADCommetServlet",
+			data:{
+				userid : $("#userid").text(),
+				comdate : $("#comdate").text(),
+				comtext : $("#comtext").val()
+			},
+			dataType: "json",
+			success :  function(data, status, xhr){
+				
+				console.log("하이");
+				
+			},
+			error : function(xhr, status, error){
+					
+				$("#CommetList").text(error);
+				$("#CommetList").text(status);
+				
+			}
+		})//ajax
+		
+		
+		
+ 	});//sendButton end
+		
+}); //doc end
+	
+</script>	
+</head>
+<body>
+	
+
+   	 작성자<span id="userid">miji</span>  <!--작성자 자동으로  등록되게 하고 싶음-->
+     작성일<span id="comdate">2023/01/01</span>  <!--당일 날짜가 자동으로 등록되게 하고 싶음-->
+     <br>
+     <hr>
+      <!--처음 댓글 입력하는 창-->
+     <textarea rows="3" cols= "84" id="comtext" style="height: 50px;"></textarea>
+   	 <button id="sendButton">작성</button>
+   	 
+
+  <div id="CommetList"></div> <!--작성된 댓글 목록 보기-->
+  
+
+
+</body>
+</html>
